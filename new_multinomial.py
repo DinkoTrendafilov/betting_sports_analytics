@@ -30,7 +30,7 @@ for a in range(n + 1):
                 result = (win ** a) * (draw ** b) * (loss ** c) * coefficient
                 res = (a, b, c)
                 d[res] += result
-                print(res,coefficient)
+                print(res, coefficient)
 
 sorted_d = dict(sorted(d.items(), key=lambda kvp: (-kvp[1], kvp[0])))
 
