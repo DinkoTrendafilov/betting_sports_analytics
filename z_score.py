@@ -1,15 +1,11 @@
-print("=" * 113)
-print("📊 Z-SCORE АНАЛИЗ - СТАТИСТИЧЕСКА ЗНАЧИМОСТ")
-print("=" * 113)
-
-# Входни данни
-observed_rate = float(input("Наблюдаван успех (%): ")) / 100
-expected_rate = float(input("Очакван успех (%): ")) / 100
-total_bets = int(input("Общ брой залози: "))
+# Input data
+observed_rate = float(input("Observed success rate (%): ")) / 100
+expected_rate = float(input("Expected success rate (%): ")) / 100
+total_bets = int(input("Total number of bets: "))
 
 print("=" * 113)
 
-# Изчисляване на Z-score
+# Calculate Z-score
 p = expected_rate
 p_hat = observed_rate
 
@@ -17,41 +13,41 @@ standard_error = (p * (1 - p) / total_bets) ** 0.5
 z_score = (p_hat - p) / standard_error
 
 print(f"Z-SCORE: {z_score:.4f}")
-print(f"Standard_error: {standard_error:.4f}")
+print(f"Standard error: {standard_error:.4f}")
 
-# Интерпретация
+# Interpretation
 print("=" * 113)
-print("📈 СТАТИСТИЧЕСКА ЗНАЧИМОСТ:")
+print("STATISTICAL SIGNIFICANCE:")
 
 if abs(z_score) < 1.0:
-    print("🎯 СЛАБА ЗНАЧИМОСТ - вероятно случайност")
+    print("WEAK SIGNIFICANCE - likely random chance")
 elif 1.0 <= abs(z_score) < 1.96:
-    print("⚠️  УМЕРЕНА ЗНАЧИМОСТ - потенциална разлика")
+    print("MODERATE SIGNIFICANCE - potential difference")
 elif 1.96 <= abs(z_score) < 2.58:
-    print("🔔 СИЛНА ЗНАЧИМОСТ - 95% сигурност")
+    print("STRONG SIGNIFICANCE - 95% confidence")
 else:
-    print("🚨 МНОГО СИЛНА ЗНАЧИМОСТ - 99% сигурност")
+    print("VERY STRONG SIGNIFICANCE - 99% confidence")
 
 print("=" * 113)
 
-# Допълнителни статистики
+# Additional statistics
 observed_wins = total_bets * p_hat
 expected_wins = total_bets * p
 difference = observed_wins - expected_wins
 
-print(f"Наблюдавани победи: {observed_wins:_.1f} от {total_bets:_}")
-print(f"Очаквани победи: {expected_wins:_.1f} от {total_bets:_}")
-print(f"Разлика: {difference:+.1f} победи")
+print(f"Observed wins: {observed_wins:_.1f} out of {total_bets:_}")
+print(f"Expected wins: {expected_wins:_.1f} out of {total_bets:_}")
+print(f"Difference: {difference:+.1f} wins")
 
 print("=" * 113)
 
-# Практическо приложение
+# Practical application
 edge = (observed_rate - expected_rate) * 100
 if z_score > 1.96 and edge > 0:
-    print(f"💰 РЕАЛЕН EDGE: +{edge:.2f}% (СТАТИСТИЧЕСКИ ЗНАЧИМ)")
-    print(f"🎲 СТОЙНОСТЕН ЗАЛОГ: ДА")
+    print(f"REAL EDGE: +{edge:.2f}% (STATISTICALLY SIGNIFICANT)")
+    print(f"VALUE BET: YES")
 else:
-    print(f"📉 НЯМА СТАТИСТИЧЕСКИ ЗНАЧИМ EDGE")
-    print(f"🎲 СТОЙНОСТЕН ЗАЛОГ: НЕ")
+    print(f"NO STATISTICALLY SIGNIFICANT EDGE")
+    print(f"VALUE BET: NO")
 
 print("=" * 113)
